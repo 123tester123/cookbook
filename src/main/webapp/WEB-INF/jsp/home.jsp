@@ -6,9 +6,8 @@
 <title>Homepage</title>
 </head>
 <body>
-	<a href="/recipes">Criar Receita<br></a>
+	<a href="/recipes/create">Criar Receita<br></a>
 	<a href="/recipes">Listar Receitas<br></a>
-	<a href="/recipes/{id}">Ver receitaaaas em detalhe</a>
 	<!--It works! This page was rendered on ${currentTime} by ${name}-->
 </body>
 </html>

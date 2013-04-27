@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipes</title>
+<title>Recipe List</title>
 </head>
 <body>
-<ul>
-<c:forEach var="item" items='${items}'>
-	<li>Receita <c:out value="${item}"></c:out></li>
-</c:forEach>
-</ul>
+<c:forEach var="recipe" items='${recipes}'>
+	<a href="/recipes/${recipe.id}">${recipe.titulo}</a><br/>
+</c:forEach><br/>
+<a href="/"><input type="submit" value="Back"></a>
 </body>
 </html>
