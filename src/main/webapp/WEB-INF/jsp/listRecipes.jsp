@@ -13,9 +13,10 @@
 	</div>
 	<br />
 	<c:forEach var="recipe" items='${recipes}'>
-		<a href="/recipes/${recipe.id}">${recipe.titulo}</a>
+		<a href="/recipes/${recipe.oid}">${recipe.title}</a>
 		<br />
 	</c:forEach>
+	<br/>
 	<a href="/"><input type="submit" value="Back"></a>
 </body>
 </html>

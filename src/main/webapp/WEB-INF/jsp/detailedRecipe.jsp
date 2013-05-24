@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipe ${recipe.id}</title>
+<title>Recipe ${recipe.oid}</title>
 </head>
 <body>
 	<div id="logo" style="width: 10px">
 		<img src="/static/detail.png" alt="logo">
 	</div>
-	<h1>Receita ${recipe.titulo}</h1>
-	<b>Problema:</b> ${recipe.problema}
+	<h1>Receita ${recipe.title}</h1>
+	<b>Problema:</b> ${recipe.problem}
 	<br />
-	<b>Solução:</b> ${recipe.solucao}
+	<b>Solução:</b> ${recipe.solution}
 	<br />
-	<b>Autor:</b> ${recipe.autor}
+	<b>Autor:</b> ${recipe.author}
 	<br />
-	<b>Criado em:</b> ${recipe.timestamp}
+	<b>Criado em:</b> ${recipe.creationTimestamp}
 	<br />
 	<br />
 	<a href="/recipes"><input type="submit" value="Back"></a>

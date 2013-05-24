@@ -1,3 +1,6 @@
+<head>
+<title>Create Recipe</title>
+</head>
 <body>
 
 	<div id="logo" style="width: 10px">
@@ -7,7 +10,7 @@
 	<form method="POST" action="/recipes">
 		Titulo: <input type="text" name="titulo" /><br /> 
 		Problema: <input type="text" name="problema" /><br /> 
-		SoluÃ§Ã£o: <input type="text" name="solucao" /><br /> 
+		Solução: <input type="text" name="solucao" /><br /> 
 		Autor: <input type="text" name="autor" /><br />
 		<input type="submit" value="Criar nova receita" />
 	</form>
