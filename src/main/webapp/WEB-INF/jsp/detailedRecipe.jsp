@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipe ${recipe.oid}</title>
+<title>Recipe ${recipe.externalId}</title>
 </head>
 <body>
 	<div id="logo" style="width: 10px">
@@ -22,5 +22,7 @@
 	<br />
 	<br />
 	<a href="/recipes"><input type="submit" value="Back"></a>
+	<br/>
+	<a href="/recipes/${recipe.externalId}/delete"><input type="submit" value="Apagar"></a>
 </body>
 </html>

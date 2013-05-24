@@ -13,7 +13,7 @@
 	</div>
 	<br />
 	<c:forEach var="recipe" items='${recipes}'>
-		<a href="/recipes/${recipe.oid}">${recipe.title}</a>
+		<a href="/recipes/${recipe.externalId}">${recipe.title}</a>
 		<br />
 	</c:forEach>
 	<br/>

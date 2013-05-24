@@ -24,6 +24,13 @@ public class RecipeController {
         return "listRecipes";
     }
     
+    @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}/delete")
+    public String deleteRecipe(@PathVariable("id") String id){
+    	Recipe recipe = AbstractDomainObject.fromExternalId(id);
+    	recipe.delete();
+    	return "redirect:/";
+    }
+    
     @RequestMapping(method=RequestMethod.POST, value="/recipes")
     public String createRecipe(@RequestParam Map<String,String> params){
     	String titulo=params.get("titulo");

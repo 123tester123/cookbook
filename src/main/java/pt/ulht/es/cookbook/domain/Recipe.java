@@ -12,4 +12,9 @@ public class Recipe extends Recipe_Base {
         setCreationTimestamp(new DateTime());
         setCookbookManager(CookbookManager.getInstance());
     }    
+    
+    public void delete(){
+    	setCookbookManager(null);
+    	super.deleteDomainObject();
+    }
 }
