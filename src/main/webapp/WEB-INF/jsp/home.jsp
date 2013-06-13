@@ -15,5 +15,7 @@
 	<a href="/recipes/create"><input type="submit" value="Criar Receita"></a>
 	<br/>
 	<a href="/recipes"><input type="submit" value="Listar Receitas"></a>
+	<br/>
+	<a href="/recipes/search"><input type="submit" value="Procurar"></a>
 </body>
 </html>

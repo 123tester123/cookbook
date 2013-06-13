@@ -8,15 +8,12 @@
 <title>Recipe List</title>
 </head>
 <body>
-	<div id="logo" style="width: 10px">
-		<img src="/static/listar.png" alt="logo">
-	</div>
-	<br />
 	<c:forEach var="recipe" items='${recipes}'>
-		<a href="/recipes/${recipe.externalId}">${recipe.title}</a>
-		<br />
+		<a href="/recipes/${recipe.externalId}">${recipe.externalId} ${version.externalId}</a>
+		<a href="/recipes/${recipe.externalId}/edit"><input type="submit" value="Editar">
+		<a href="/recipes/${recipe.externalId}/delete"><input type="submit" value="Apagar">
+		<a href="/recipes/${recipe.externalId}/versions"><input type="submit" value="Versões"></a><br />
 	</c:forEach>
 	<br/>
-	<a href="/"><input type="submit" value="Back"></a>
 </body>
 </html>

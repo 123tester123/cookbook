@@ -5,19 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recipe ${recipe.externalId}</title>
+<title>Recipe List</title>
 </head>
 <body>
 	<div id="logo" style="width: 10px">
-		<img src="/static/detail.png" alt="logo">
+		<img src="/static/listar.png" alt="logo">
 	</div>
-	
-		<p> Title: ${version.title}<br />
-		<p> Problem: ${version.problem}<br />
-		<p> Solution: ${version.solution}<br />
-		<p> Author: ${version.author}<br />
-		<p> Tag: ${version.tag}<br />
-		<p> Timestamp: ${version.creationTimestamp}<br />
-		<br />
+	<br />
+	<c:forEach items="${versionList}" var="version">
+			${version.externalId}		<br />
+	</c:forEach>
+	<br/>
 </body>
 </html>

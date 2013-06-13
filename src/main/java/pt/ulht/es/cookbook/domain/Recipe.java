@@ -1,20 +1,22 @@
 package pt.ulht.es.cookbook.domain;
 
-import org.joda.time.DateTime;
-
 public class Recipe extends Recipe_Base {
-		    
-    public Recipe(String title, String problem, String solution, String author) {    	
-        setTitle(title);
-        setProblem(problem);
-        setSolution(solution);
-        setAuthor(author);
-        setCreationTimestamp(new DateTime());
-        setCookbookManager(CookbookManager.getInstance());
-    }    
-    
+    	
+	public Recipe(){
+		setCookbookManager(CookbookManager.getInstance());
+	}
+	
+	public void addVersion(String title, String problem, String solution, String author, String tag){
+		addVersion(new Version(title,problem,solution,author,tag));
+	}
+	
     public void delete(){
-    	setCookbookManager(null);
+    	for ( Version version : getVersionSet()){
+    		version.delete();
+    	}
+    	removeCookbookManager();
     	super.deleteDomainObject();
     }
+    
 }
+
