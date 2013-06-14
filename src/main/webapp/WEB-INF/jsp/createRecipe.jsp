@@ -1,17 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<title>Create Recipe</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Create Recipe</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 <body>
-	<div id="logo" style="width: 10px">
-		<img src="/static/criar.png" alt="logo">
-	</div>
+	<p style="font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 200%; text-align: center;"> Cookbook Manager
+	<a href="/"><img src="/static/home.png" alt="homebutton" width="15" height="15"></a>
+	<a href="/recipes"><img src="/static/book.png" alt="homebutton" width="15" height="15"></a>
+	<a href="/recipes/search"><img src="/static/search.png" alt="homebutton" width="15" height="15"></a>
+	<p style="font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 100%; text-align: center;"> Criar receita</p>
+		
+	<hr style="width:50%; border: 1px solid #c00; align: center" />
+
+	<br/>
+
 	<br />
 	<form method="POST" action="/recipes">
-		Titulo: <input type="text" name="title" /><br /> 
-		Problema: <input type="text" name="problem" /><br /> 
-		Solução: <input type="text" name="solution" /><br /> 
-		Autor: <input type="text" name="author" /><br />
-		Tag: <input type="text" name="tag" /><br />
-		<input type="submit" value="Criar nova receita" />
+		<input type="text" class="input center-element" placeholder="Titulo" name="title" autofocus /><br/>
+		<input type="text" class="input center-element" placeholder="Problema" name="problem" autofocus /><br /> 
+		<input type="text" class="input center-element" placeholder="SoluÃ§Ã£o" name="solution" autofocus /><br /> 
+		<input type="text" class="input center-element" placeholder="Autor" name="author" autofocus /><br />
+		<input type="text" class="input center-element" placeholder="Tags" name="tag" autofocus /><br />
+		<br/>
+		<button type="submit" class="btn center-element">Criar Receita</button>
 	</form>
 </body>
+
+

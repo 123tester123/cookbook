@@ -16,6 +16,7 @@ import pt.ist.fenixframework.pstm.AbstractDomainObject;
 import pt.ulht.es.cookbook.domain.CookbookManager;
 import pt.ulht.es.cookbook.domain.Recipe;
 import pt.ulht.es.cookbook.domain.Version;
+import pt.ulht.es.cookbook.domain.Version.TitleComp;
 
 @Controller
 public class RecipeController{
@@ -34,16 +35,8 @@ public class RecipeController{
 		for ( Recipe recipe : recipes ){
 			lastVersion.add(getLastVersion(recipe));
 		}
-		model.addAttribute("recipes",recipes);	
+		Collections.sort(lastVersion,new TitleComp());
 		model.addAttribute("version",lastVersion);
-		
-		/*List<Version> versions = new ArrayList<Version>();
-		for ( Recipe recipe : recipes ){
-			List<Version> versionList = new ArrayList<Version>(recipe.getVersionSet());
-			Collections.sort(versionList);
-			versions.add(versionList.get(versionList.size()-1));
-		}		
-		model.addAttribute("versions",versions);*/	
         return "listRecipes";
     }
     
@@ -53,14 +46,10 @@ public class RecipeController{
     	String problem=params.get("problem");
     	String solution=params.get("solution");
     	String author=params.get("author");  	
-    	String tag=params.get("tag");
-    	
-    	Recipe recipe = new Recipe();
-    	
-    	recipe.addVersion(title,problem,solution,author,tag);
-    	    	
-    	return "redirect:/recipes/"+recipe.getExternalId();
-    	
+    	String tag=params.get("tag");    	
+    	Recipe recipe = new Recipe();    	
+    	recipe.addVersion(title,problem,solution,author,tag);    	    	
+    	return "redirect:/recipes/"+getLastVersion(recipe).getExternalId();    	
     }
     
     @RequestMapping(method=RequestMethod.GET, value="/recipes/create")
@@ -75,30 +64,20 @@ public class RecipeController{
     		model.addAttribute("version",version);
         	return "detailedRecipe";
     	}
-    	else return "recipeNotFound"; 	
-    	
-    	/*Recipe recipe = AbstractDomainObject.fromExternalId(id);
-    	List<Version> versionList = new ArrayList<Version>(recipe.getVersionSet());
-    	Collections.sort(versionList);
-    	Version version = versionList.get(versionList.size()-1);
-    	if(version!=null){
-    		model.addAttribute("version",version);
-        	return "detailedRecipe";
-    	}
-    	else return "recipeNotFound";*/    	
+    	else return "recipeNotFound";
     }
     
-    @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}/versions")
-    public String listVersions(Model model, @PathVariable String id) {
+    @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}/historico")
+    public String listVersions(@PathVariable String id, Model model) {
     	Version version = AbstractDomainObject.fromExternalId(id);
     	Recipe recipe = version.getRecipe();    	
       	List<Version> versionList = new ArrayList<Version>(recipe.getVersionSet());
+      	versionList.remove(versionList.get(0));
     	model.addAttribute("versionList",versionList);
-    	model.addAttribute("recipe",recipe);
     	return "listVersions";
     }
     
-    @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}/versions/{id}")
+    @RequestMapping(method=RequestMethod.GET, value="/recipes/{id}/historico/{id}")
     public String showVersion(Model model, @PathVariable String id) {
     	Version version = AbstractDomainObject.fromExternalId(id);
     	model.addAttribute("version",version);
@@ -107,7 +86,8 @@ public class RecipeController{
     
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/{id}/delete")
 	public String deleteRecipe(@PathVariable("id") String id) {
-		Recipe recipe = AbstractDomainObject.fromExternalId(id);
+		Version version = AbstractDomainObject.fromExternalId(id);
+		Recipe recipe = version.getRecipe();
 		recipe.delete();
 		CookbookManager.getInstance().removeRecipe(recipe);
 		return "redirect:/recipes";
@@ -118,32 +98,38 @@ public class RecipeController{
     	return "searchRecipe";
     }
     
-    /*@RequestMapping(method=RequestMethod.POST, value="/recipes/search")
+    @RequestMapping(method=RequestMethod.POST, value="/recipes/search")
     public String searchRecipe(@RequestParam Map<String,String> params,Model model){
     	String searchParams = params.get("searchParams");
-    	String[] tokens = searchParams.split(",");
+    	String[] tokens = searchParams.split(",");    	
     	List<Version> results = new ArrayList<Version>();
-    	for ( )    	
-    	return "searchRecipe";
-    }*/
+    	for ( Recipe recipe : CookbookManager.getInstance().getRecipeSet()){
+    		if(getLastVersion(recipe).match(tokens)){
+    			results.add(getLastVersion(recipe));
+    		}
+    	}    	
+    	model.addAttribute("results",results);    	
+    	return "searchResults";
+    }
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/recipes/{id}/edit")
 	public String showRecipeEditForm(@PathVariable("id") String id, Model model) {
-		Recipe recipe = AbstractDomainObject.fromExternalId(id);
-		model.addAttribute("recipe",recipe);
+		Version version = AbstractDomainObject.fromExternalId(id);
+		model.addAttribute("version",version);
 		return "editRecipe";
 	}
 	
     @RequestMapping(method=RequestMethod.POST, value="/recipes/{id}")
     public String editRecipe(@PathVariable("id") String id, @RequestParam Map<String,String> params){
-    	Recipe recipe = AbstractDomainObject.fromExternalId(id);
+    	Version version = AbstractDomainObject.fromExternalId(id);
+    	Recipe recipe = version.getRecipe();
     	String title=params.get("title");
     	String problem=params.get("problem");
     	String solution=params.get("solution");
     	String author=params.get("author");  	
     	String tag=params.get("tag");
     	recipe.addVersion(title,problem,solution,author,tag);    	    	
-    	return "redirect:/recipes/"+recipe.getExternalId();    	
+    	return "redirect:/recipes/"+getLastVersion(recipe).getExternalId();    	
     }
 }
 

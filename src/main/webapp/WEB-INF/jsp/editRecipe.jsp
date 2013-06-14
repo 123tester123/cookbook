@@ -1,8 +1,32 @@
-<form method="POST" action="/recipes/${recipe.externalId}">
-	Titulo: <input type="text" name="title" /><br /> 
-	Problema: <input type="text" name="problem" /><br /> 
-	Solução: <input type="text" name="solution" /><br /> 
-	Autor: <input type="text" name="author" /><br />
-	Tag: <input type="text" name="tag" /><br />
-	<input type="submit" value="Editar" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Edit Recipe</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body>
+	<p style="font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 200%; text-align: center;"> Cookbook Manager
+		<a href="/"><img src="/static/home.png" alt="homebutton" width="15" height="15"></a>
+	<a href="/recipes"><img src="/static/book.png" alt="homebutton" width="15" height="15"></a>
+	<a href="/recipes/search"><img src="/static/search.png" alt="homebutton" width="15" height="15"></a>
+	<p style="font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 100%; text-align: center;"> Editar receita</p>
+		
+	<hr style="width:50%; border: 1px solid #c00; align: center" />
+
+	<br/>
+
+	<br />
+<form method="POST" action="/recipes/${version.externalId}">
+
+	
+		<input type="text" class="input center-element" placeholder="${version.title}" name="title" autofocus /><br/>
+		<input type="text" class="input center-element" placeholder="${version.problem}""Problema" name="problem" autofocus /><br /> 
+		<input type="text" class="input center-element" placeholder="${version.solution}""SoluÃ§Ã£o" name="solution" autofocus /><br /> 
+		<input type="text" class="input center-element" placeholder="${version.author}""Autor" name="author" autofocus /><br />
+		<input type="text" class="input center-element" placeholder="${version.tag}""Tags" name="tag" autofocus /><br />
+		<br/>
+		<button type="submit" class="btn center-element">Editar</button>
 </form>
